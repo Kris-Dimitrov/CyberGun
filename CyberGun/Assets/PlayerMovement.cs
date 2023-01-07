@@ -5,9 +5,16 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
+    float playerHeight = 2f;
     public float moveSpeed = 6f;
-    float drag = 6f;
-    float speedMult = 10f;
+    [SerializeField] float drag = 6f;
+    [SerializeField] float speedMult = 10f;
+    [SerializeField] float jumpForce = 10f;
+
+    [Header("Keybinds")]
+    [SerializeField] KeyCode jumpKey = KeyCode.Space;
+
+    bool isGrounded;
 
     float horizontalMovement;
     float verticalMovement;
@@ -20,14 +27,28 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        ApplyDrag();
     }
     void Update()
     {
-        Move();
-        ApplyDrag();
+        GetInput();
+
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2 + 0.1f);
+
+        if (Input.GetKeyDown(jumpKey) && isGrounded)
+        {
+            Jump();
+        }
     }
 
-    private void Move()
+
+
+    private void FixedUpdate()
+    {
+        ApplyForces();
+    }
+
+    private void GetInput()
     {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         verticalMovement = Input.GetAxisRaw("Vertical");
@@ -35,18 +56,19 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = transform.forward * verticalMovement + transform.right * horizontalMovement;
     }
 
-    private void ApplyDrag() 
+    private void ApplyDrag()
     {
         rb.drag = drag;
-    }
-
-    private void FixedUpdate()
-    {
-        ApplyForces();
     }
 
     private void ApplyForces() 
     {
         rb.AddForce(moveDirection.normalized * moveSpeed * speedMult, ForceMode.Acceleration);
     }
+
+    private void Jump() 
+    {
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+
 }
