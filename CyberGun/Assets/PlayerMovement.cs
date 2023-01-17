@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     float playerHeight = 2f;
     public float moveSpeed = 6f;
+    //private float moveSpeed = 6f;
     [SerializeField] float drag = 6f;
     [SerializeField] float speedMult = 10f;
     [SerializeField] float dashMult = 10f;
@@ -39,8 +40,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-
+        
         rb = GetComponent<Rigidbody>();
+        
         rb.freezeRotation = true;
         rb.useGravity = false;
         ApplyDrag();
@@ -54,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         GetInput();
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2 + 0.1f);
         HandleJumps();
-        Slam();
         Dash();
     }
 
@@ -62,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
     {
         ApplyMovement();
         DashCharger();
+        Slam();
     }
 
     private void GetInput()
@@ -90,19 +92,19 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void Jump()
+    private void Jump() // This is my Jump function. It adds applies an impulse to the rigidbody
     {
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
     private void HandleJumps()
     {
-        if (Input.GetKeyDown(jumpKey) && isGrounded)
+        if (Input.GetKeyDown(jumpKey) && isGrounded) // First Jump
         {
             Jump();
         }
 
-        if (Input.GetKeyDown(jumpKey) && !isGrounded && canDoubleJump)
+        if (Input.GetKeyDown(jumpKey) && !isGrounded && canDoubleJump) // Double Jump
         {
             Jump();
             canDoubleJump = false;
