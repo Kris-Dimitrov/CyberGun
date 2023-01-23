@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,10 +15,17 @@ public class Inventory : MonoBehaviour
     int permaMagazineSize = 0;
     int permaReloadSpeed = 0;
 
-    public Dictionary<string, int> attributes = new Dictionary<string, int>();
+    private Dictionary<string, int> attributes = new Dictionary<string, int>();
 
-    public void CheckStats() 
+    public void Start()
     {
+        CheckStats();
+    }
+
+    public Dictionary<string, int> CheckStats() 
+    {
+        attributes.Clear();
+        AddBaseStats();
         foreach (var item in core.Attributes)
         {
             if (attributes.ContainsKey(item.Key.ToString()))
@@ -62,5 +70,16 @@ public class Inventory : MonoBehaviour
                 attributes.Add(item.Key.ToString(), item.Value);
             }
         }
+
+        return attributes;
+    }
+
+    public void AddBaseStats() 
+    {
+        attributes.Add("Damage", 1);
+        attributes.Add("ShotSpeed", 1);
+        attributes.Add("MagazineSize", 1);
+        attributes.Add("ReloadSpeed", 1);
+
     }
 }

@@ -7,7 +7,7 @@ public class OpticItem : MonoBehaviour, IItem
 {
     public int Level { get; set; }
     public string Name { get; set; }
-    public Dictionary<IItem.Buffs, int> Attributes { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public Dictionary<IItem.Buffs, int> Attributes { get; set; }
 
     public enum Buffs
     {

@@ -10,12 +10,13 @@ public class CoreItem : MonoBehaviour, IItem
     public string Name { get; set; }
     public string Type { get; set; }
     public Dictionary<Buffs, int> Attributes { get; set; }
+    Dictionary<IItem.Buffs, int> IItem.Attributes { get; set; }
 
     public enum Buffs {
         Damage,
         ShotSpeed,
         Multishot,
-        ShotDelay
+        ShotDelay,
     }
 
 

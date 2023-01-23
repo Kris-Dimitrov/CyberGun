@@ -11,10 +11,8 @@ public class HandleItem : MonoBehaviour, IItem
 
     public enum Buffs
     {
-        Damage,
-        ShotSpeed,
-        Multishot,
-        ShotDelay
+        MagazineSize,
+        ReloadSpeed
     }
     public void Generate()
     {
