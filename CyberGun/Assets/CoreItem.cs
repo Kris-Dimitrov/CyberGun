@@ -4,25 +4,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoreItem : MonoBehaviour, IItem
+public class CoreItem : IItem
 {
     public int Level { get; set; }
     public string Name { get; set; }
     public string Type { get; set; }
     public Dictionary<Buffs, int> Attributes { get; set; }
-    Dictionary<IItem.Buffs, int> IItem.Attributes { get; set; }
-
     public enum Buffs {
         Damage,
         ShotSpeed,
-        Multishot,
         ShotDelay,
     }
 
 
-    public void Generate() 
+    public void Generate()
     {
-        Type = "HitScan";
         for (int i = 0; i < Level; i++)
         {
             Buffs type = (Buffs)Random.Range(0, Buffs.GetNames(typeof(Buffs)).Length);
@@ -30,15 +26,24 @@ public class CoreItem : MonoBehaviour, IItem
             {
                 Attributes[type] += Level * 10;
             }
-            else 
+            else
             {
                 Attributes.Add(type, Level * 10);
             }
         }
     }
 
-    public void Recycle() 
+    public void Recycle()
     {
-        
+
+    }
+
+    public CoreItem(string name, int level, string type) 
+    {
+        Name = name;
+        Level = level;
+        Type = type;
+        Attributes = new Dictionary<Buffs, int>();
+        Generate();
     }
 }

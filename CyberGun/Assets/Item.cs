@@ -7,8 +7,6 @@ public interface IItem
     public int Level { get; set; }
     public string Name { get; set; }
     public enum Buffs { }
-
-    public Dictionary<Buffs, int> Attributes { get; set; }
     public void Generate()
     {
         // gets overriden by inherited classes in order to generate specific 

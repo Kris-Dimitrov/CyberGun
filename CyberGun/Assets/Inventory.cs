@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory
 {
-    CoreItem core;
-    OpticItem optic;
-    HandleItem handle;
-    BarrelItem barrel;
+    public CoreItem core;
+    public OpticItem optic;
+    public HandleItem handle;
+    public BarrelItem barrel;
 
     int permaDamage = 0;
     int permaShotDelay = 0;
@@ -19,6 +19,10 @@ public class Inventory : MonoBehaviour
 
     public void Start()
     {
+        core = new CoreItem("Default Core", 1, "HitScan");
+        optic = new OpticItem("Default Optic", 1);
+        handle = new HandleItem("Default Handle", 1);
+        barrel = new BarrelItem("Barrel Handle", 1);
         CheckStats();
     }
 
@@ -26,6 +30,9 @@ public class Inventory : MonoBehaviour
     {
         attributes.Clear();
         AddBaseStats();
+
+        Debug.Log(core.Name);
+
         foreach (var item in core.Attributes)
         {
             if (attributes.ContainsKey(item.Key.ToString()))
@@ -80,6 +87,10 @@ public class Inventory : MonoBehaviour
         attributes.Add("ShotSpeed", 1);
         attributes.Add("MagazineSize", 1);
         attributes.Add("ReloadSpeed", 1);
+    }
 
+    public void ApplyPermaBuffs() 
+    {
+        
     }
 }
