@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ShootingScript : MonoBehaviour
 {
-    public float damage;
+    public int damage;
     public float shotSpeed;
     public int magazineSize;
     public int currentBulletsInMagazine;
@@ -58,8 +58,13 @@ public class ShootingScript : MonoBehaviour
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
             Vector3[] positions = { transform.position, cam.transform.forward * hit.distance };
+            lineRenderer.enabled = true;
             lineRenderer.SetPositions(positions);
-            Debug.Log("Did Hit");
+            Debug.Log(hit.collider.gameObject.tag);
+            if (hit.collider.gameObject.tag == "Enemy")
+            {
+                hit.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
+            }
         }
         else
         {
