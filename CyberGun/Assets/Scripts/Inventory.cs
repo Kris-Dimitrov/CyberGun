@@ -85,12 +85,16 @@ public class Inventory
     {
         attributes.Add("Damage", 1);
         attributes.Add("ShotSpeed", 1);
-        attributes.Add("MagazineSize", 1);
+        attributes.Add("MagazineSize", 5);
         attributes.Add("ReloadSpeed", 1);
+        attributes.Add("Accuracy", 2);
     }
 
     public void ApplyPermaBuffs() 
     {
-        
+        attributes["Damage"] += permaDamage;
+        attributes["MagazineSize"] += permaMagazineSize;
+        attributes["ReloadSpeed"] += permaReloadSpeed;
+        attributes["ShotDelay"] += permaShotDelay;
     }
 }
