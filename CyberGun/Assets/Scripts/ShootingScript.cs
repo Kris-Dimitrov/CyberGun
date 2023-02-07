@@ -12,6 +12,7 @@ public class ShootingScript : MonoBehaviour
     public int magazineSize;
     public int currentBulletsInMagazine;
     public int reloadSpeed;
+    public int multishot;
 
     [SerializeField]
     public Inventory inventory;
@@ -66,7 +67,7 @@ public class ShootingScript : MonoBehaviour
             Debug.Log(hit.collider.gameObject.tag);
             if (hit.collider.gameObject.tag == "Enemy")
             {
-                hit.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage );
+                hit.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage * multishot);
             }
         }
         else
@@ -78,10 +79,6 @@ public class ShootingScript : MonoBehaviour
         }
     }
     public void FireProjectile()
-    {
-
-    }
-    public void FireLaser()
     {
 
     }
@@ -110,6 +107,10 @@ public class ShootingScript : MonoBehaviour
             else if (stat.Key == "Accuracy") 
             {
                 accuracy = stat.Value / 10f;
+            }
+            else if (stat.Key == "'Multishot")
+            {
+                multishot = stat.Value;
             }
         }
     }

@@ -41,4 +41,18 @@ public class HandleItem : IItem
         Attributes = new Dictionary<Buffs, int>();
         Generate();
     }
+
+    public override string ToString()
+    {
+        string res = "";
+        res += "Name: " +  Name + "\n";
+        res += "Level: " + Level.ToString() + "\n";
+        res += "Attributes: \n";
+        foreach (var type in Attributes.Keys) 
+        {
+            res += type.ToString()+ ": " + Attributes[type].ToString() + "\n ";
+        }
+
+        return res;
+    }
 }

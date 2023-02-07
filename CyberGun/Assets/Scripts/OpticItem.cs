@@ -8,8 +8,6 @@ public class OpticItem : IItem
     public int Level { get; set; }
     public string Name { get; set; }
     public Dictionary<Buffs, int> Attributes { get; set; }
-
-
     public enum Buffs
     {
         Damage,
@@ -44,5 +42,19 @@ public class OpticItem : IItem
         Level = level;
         Attributes = new Dictionary<Buffs, int>();
         Generate();
+    }
+
+    public override string ToString()
+    {
+        string res = "";
+        res += "Name: " + Name + "\n";
+        res += "Level: " + Level.ToString() + "\n";
+        res += "Attributes: \n";
+        foreach (var type in Attributes.Keys)
+        {
+            res += type.ToString() + ": " + Attributes[type].ToString() + "\n ";
+        }
+
+        return res;
     }
 }

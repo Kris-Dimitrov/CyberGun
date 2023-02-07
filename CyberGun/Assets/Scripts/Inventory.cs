@@ -22,7 +22,7 @@ public class Inventory
         core = new CoreItem("Default Core", 1, "HitScan");
         optic = new OpticItem("Default Optic", 1);
         handle = new HandleItem("Default Handle", 1);
-        barrel = new BarrelItem("Barrel Handle", 1);
+        barrel = new BarrelItem("Default Barrel", 1);
         CheckStats();
     }
 
@@ -97,4 +97,6 @@ public class Inventory
         attributes["ReloadSpeed"] += permaReloadSpeed;
         attributes["ShotDelay"] += permaShotDelay;
     }
+
+
 }

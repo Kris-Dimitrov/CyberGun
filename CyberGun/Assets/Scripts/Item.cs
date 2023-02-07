@@ -11,7 +11,7 @@ public interface IItem
     {
         // gets overriden by inherited classes in order to generate specific 
     }
-    public void Recycle() 
+    public void Recycle()
     {
         // Deletes item, grants player permanent stats based on the level of the item 
     }
