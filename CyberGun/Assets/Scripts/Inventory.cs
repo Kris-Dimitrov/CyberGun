@@ -19,7 +19,7 @@ public class Inventory
 
     public void Start()
     {
-        core = new CoreItem("Default Core", 1, "HitScan");
+        core = new CoreItem("Default Core", 1, "Projectile");
         optic = new OpticItem("Default Optic", 1);
         handle = new HandleItem("Default Handle", 1);
         barrel = new BarrelItem("Default Barrel", 1);
@@ -84,7 +84,7 @@ public class Inventory
     public void AddBaseStats() 
     {
         attributes.Add("Damage", 1);
-        attributes.Add("ShotSpeed", 1);
+        attributes.Add("ShotSpeed", 100);
         attributes.Add("MagazineSize", 5);
         attributes.Add("ReloadSpeed", 1);
         attributes.Add("Accuracy", 2);

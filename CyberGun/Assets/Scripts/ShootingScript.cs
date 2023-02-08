@@ -14,13 +14,13 @@ public class ShootingScript : MonoBehaviour
     public int reloadSpeed;
     public int multishot;
 
-    [SerializeField]
-    public Inventory inventory;
-    private Dictionary<string, int> attributes;
+    [SerializeField] public Inventory inventory;
+    [SerializeField]private Dictionary<string, int> attributes;
 
     public Camera cam;
     public LineRenderer lineRenderer;
-    
+
+    [SerializeField] GameObject bullet;
 
     public void Start()
     {   
@@ -28,6 +28,7 @@ public class ShootingScript : MonoBehaviour
         inventory.Start();
         CheckStats();
         currentBulletsInMagazine = magazineSize;
+        multishot = 1;
     }
 
     public void Update()
@@ -49,6 +50,11 @@ public class ShootingScript : MonoBehaviour
             if (inventory.core.Type == "HitScan")
             {
                 FireHitScan();
+                currentBulletsInMagazine--;
+            }
+            else if (inventory.core.Type == "Projectile")
+            {
+                FireProjectile();
                 currentBulletsInMagazine--;
             }
         }
@@ -79,8 +85,16 @@ public class ShootingScript : MonoBehaviour
         }
     }
     public void FireProjectile()
-    {
-
+    {   
+        for (int i = 0; i < multishot; i++)
+        {
+            GameObject newBullet =  Instantiate(bullet, transform);
+            newBullet.transform.rotation = cam.transform.rotation;
+            newBullet.transform.Rotate(new Vector3((Random.value - 0.5f) * accuracy, (Random.value - 0.5f) * accuracy, (Random.value - 0.5f) *accuracy));
+            newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * shotSpeed, ForceMode.Impulse);
+            newBullet.GetComponent<BulletScript>().damage = damage;
+            newBullet.transform.SetParent(null);
+        }
     }
 
     public void CheckStats() 
