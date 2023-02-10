@@ -6,6 +6,7 @@ public class FlyingEnemy : MonoBehaviour
 {
     GameObject player;
     [SerializeField] Rigidbody rb;
+    [SerializeField] int speed;
     void Start()
     {   
         player = GameObject.Find("Player");
@@ -14,6 +15,7 @@ public class FlyingEnemy : MonoBehaviour
     void FixedUpdate()
     {
         transform.LookAt(player.transform.position);
-        rb.AddForce(transform.forward, ForceMode.Acceleration);
+        rb.velocity = transform.forward * speed;
+            
     }
 }

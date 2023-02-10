@@ -11,7 +11,7 @@ public class EnemyContactDamage : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
     }
 
