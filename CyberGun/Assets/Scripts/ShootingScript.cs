@@ -28,7 +28,7 @@ public class ShootingScript : MonoBehaviour
         inventory.Start();
         CheckStats();
         currentBulletsInMagazine = magazineSize;
-        multishot = 1;
+        multishot = 5;
     }
 
     public void Update()
@@ -90,7 +90,7 @@ public class ShootingScript : MonoBehaviour
         {
             GameObject newBullet =  Instantiate(bullet, transform);
             newBullet.transform.rotation = cam.transform.rotation;
-            newBullet.transform.Rotate(new Vector3((Random.value - 0.5f) * accuracy, (Random.value - 0.5f) * accuracy, (Random.value - 0.5f) *accuracy));
+            newBullet.transform.Rotate((Random.value - 0.5f) * accuracy * 50, (Random.value - 0.5f) * accuracy * 50, (Random.value - 0.5f) * accuracy * 50, Space.Self);
             newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * shotSpeed, ForceMode.Impulse);
             newBullet.GetComponent<BulletScript>().damage = damage;
             newBullet.transform.SetParent(null);
