@@ -7,9 +7,11 @@ public class ZoneEnemyScript : MonoBehaviour
     public int damage;
     private Transform player;
     [SerializeField] float minimalDistanceToTrigger;
-
+    
     [SerializeField] float maxCharge;
     [SerializeField] float currentCharge;
+
+    [SerializeField] Light chargeLight;
     void Start()
     {
         player = GameObject.Find("Player").transform;
@@ -22,11 +24,17 @@ public class ZoneEnemyScript : MonoBehaviour
             currentCharge += Time.deltaTime;
             Debug.Log(currentCharge);
         }
+        else if(currentCharge > 0)
+        {
+            currentCharge -= Time.deltaTime;
+        }
 
         if (currentCharge >= maxCharge)
         {
             currentCharge = 0;
             GameObject.Find("Player").GetComponent<PlayerHealth>().TakeDamage(damage);
         }
+
+        chargeLight.intensity = Mathf.Clamp01(currentCharge / maxCharge) * 2;
     }
 }

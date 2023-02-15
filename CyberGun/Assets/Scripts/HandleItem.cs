@@ -8,6 +8,7 @@ public class HandleItem : IItem
     public int Level { get; set; }
     public string Name { get; set; }
     public Dictionary<Buffs, int> Attributes { get; set; }
+    public string FireMode { get; set; }
     public enum Buffs
     {
         MagazineSize,
@@ -34,12 +35,13 @@ public class HandleItem : IItem
 
     }
 
-    public HandleItem(string name, int level)
+    public HandleItem(string name, int level, string fireMode)
     {
         Name = name;
         Level = level;
         Attributes = new Dictionary<Buffs, int>();
         Generate();
+        FireMode = fireMode;
     }
 
     public override string ToString()
@@ -47,6 +49,7 @@ public class HandleItem : IItem
         string res = "";
         res += "Name: " +  Name + "\n";
         res += "Level: " + Level.ToString() + "\n";
+        res += "FireMode: " + FireMode + "\n";
         res += "Attributes: \n";
         foreach (var type in Attributes.Keys) 
         {

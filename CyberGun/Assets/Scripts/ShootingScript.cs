@@ -13,9 +13,10 @@ public class ShootingScript : MonoBehaviour
     public int currentBulletsInMagazine;
     public int reloadSpeed;
     public int multishot;
+    public int shotDelay;
 
     [SerializeField] public Inventory inventory;
-    [SerializeField]private Dictionary<string, int> attributes;
+    [SerializeField] private Dictionary<string, int> attributes;
 
     public Camera cam;
     public LineRenderer lineRenderer;
@@ -23,7 +24,7 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] GameObject bullet;
 
     public void Start()
-    {   
+    {
         inventory = new Inventory();
         inventory.Start();
         CheckStats();
@@ -31,7 +32,7 @@ public class ShootingScript : MonoBehaviour
         multishot = 1;
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -43,7 +44,7 @@ public class ShootingScript : MonoBehaviour
             Reload();
         }
     }
-    public void Shoot() 
+    public void Shoot()
     {
         if (currentBulletsInMagazine > 0)
         {
@@ -57,17 +58,19 @@ public class ShootingScript : MonoBehaviour
                 FireProjectile();
                 currentBulletsInMagazine--;
             }
+
+
         }
     }
-    public void FireHitScan() 
+    public void FireHitScan()
     {
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         ray.direction = new Vector3(ray.direction.x + (Random.value - 0.5f) * accuracy, ray.direction.y + (Random.value - 0.5f) * accuracy, ray.direction.z + (Random.value - 0.5f) * accuracy);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            Vector3[] positions = { transform.position, hit.point};
-            
+            Vector3[] positions = { transform.position, hit.point };
+
             lineRenderer.SetPositions(positions);
             StartCoroutine(ShowLaser());
             Debug.Log(hit.collider.gameObject.tag);
@@ -85,10 +88,10 @@ public class ShootingScript : MonoBehaviour
         }
     }
     public void FireProjectile()
-    {   
+    {
         for (int i = 0; i < multishot; i++)
         {
-            GameObject newBullet =  Instantiate(bullet, transform);
+            GameObject newBullet = Instantiate(bullet, transform);
             newBullet.transform.rotation = cam.transform.rotation;
             newBullet.transform.Rotate((Random.value - 0.5f) * accuracy * 50, (Random.value - 0.5f) * accuracy * 50, (Random.value - 0.5f) * accuracy * 50, Space.Self);
             newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * shotSpeed, ForceMode.Impulse);
@@ -97,10 +100,10 @@ public class ShootingScript : MonoBehaviour
         }
     }
 
-    public void CheckStats() 
+    public void CheckStats()
     {
         attributes = inventory.CheckStats();
-        foreach(var stat in attributes) 
+        foreach (var stat in attributes)
         {
             if (stat.Key == "Damage")
             {
@@ -110,6 +113,10 @@ public class ShootingScript : MonoBehaviour
             {
                 shotSpeed = stat.Value;
             }
+            else if (stat.Key == "ShotDelay")
+            {
+                shotDelay = stat.Value;
+            }
             else if (stat.Key == "MagazineSize")
             {
                 magazineSize = stat.Value;
@@ -118,7 +125,7 @@ public class ShootingScript : MonoBehaviour
             {
                 reloadSpeed = stat.Value;
             }
-            else if (stat.Key == "Accuracy") 
+            else if (stat.Key == "Accuracy")
             {
                 accuracy = stat.Value / 10f;
             }
@@ -129,12 +136,12 @@ public class ShootingScript : MonoBehaviour
         }
     }
 
-    public void Reload() 
+    public void Reload()
     {
         currentBulletsInMagazine = magazineSize;
     }
 
-    IEnumerator ShowLaser() 
+    IEnumerator ShowLaser()
     {
         lineRenderer.enabled = true;
         yield return new WaitForSeconds(0.1f);

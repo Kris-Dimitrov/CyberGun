@@ -52,6 +52,7 @@ public class CoreItem : IItem
         string res = "";
         res += "Name: " + Name + "\n";
         res += "Level: " + Level.ToString() + "\n";
+        res += "Type: " + Type + "\n";
         res += "Attributes: \n";
         foreach (var type in Attributes.Keys)
         {
