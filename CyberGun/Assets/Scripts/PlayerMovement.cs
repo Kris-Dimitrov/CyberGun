@@ -18,8 +18,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxDashCount = 10f;
     [SerializeField] float dashConsumed = 10f;
     [SerializeField] float dashRecoverySpeed = 0.1f;
-
-
+    [SerializeField] float minimumHeight = -20f;
+    
     [Header("Keybinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
     [SerializeField] KeyCode slamKey = KeyCode.LeftControl;
@@ -36,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 moveDirection;
 
+     Vector3 startingPosition;
+
     Rigidbody rb;
 
     private void Start()
@@ -50,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
         canDoubleJump = true;
 
         currentDashAmount = maxDashCount;
+
+        startingPosition = this.transform.position;
     }
     void Update()
     {
@@ -64,6 +68,11 @@ public class PlayerMovement : MonoBehaviour
         ApplyMovement();
         DashCharger();
         Slam();
+
+        if (this.transform.position.y < minimumHeight) 
+        {
+            this.transform.position = startingPosition;
+        }
     }
 
     private void GetInput()

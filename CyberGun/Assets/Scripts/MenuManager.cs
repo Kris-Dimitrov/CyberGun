@@ -11,12 +11,21 @@ public class MenuManager : MonoBehaviour
     [SerializeField] TMP_Text optic;
     [SerializeField] TMP_Text core;
     [SerializeField] TMP_Text handle;
+    [SerializeField] TMP_Text playerHealth;
+    [SerializeField] TMP_Text ammo;
+    [SerializeField] TMP_Text score;
 
     bool isInventoryOpen;
     Inventory currentPlayerInventory;
+    ShootingScript shootingScript;
+    PlayerHealth playerHealthScript;
+    ScoreManager scoreManager;
 
     private void Start()
     {
+        shootingScript = GameObject.FindWithTag("Player").GetComponent<ShootingScript>();
+        playerHealthScript = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         isInventoryOpen = false;
         CloseInventory();
     }
@@ -36,11 +45,14 @@ public class MenuManager : MonoBehaviour
                 OpenInventory();
             }   
         }
+        playerHealth.text = "HP: " + playerHealthScript.health.ToString() + "/" + playerHealthScript.maxHealth.ToString();
+        ammo.text = shootingScript.currentBulletsInMagazine.ToString() + "/" + shootingScript.magazineSize.ToString();
+        score.text = scoreManager.score.ToString();
     }
 
     private void OpenInventory() 
     {
-        currentPlayerInventory = GameObject.FindWithTag("Player").GetComponent<ShootingScript>().inventory;
+        currentPlayerInventory = shootingScript.inventory;
         Debug.Log(currentPlayerInventory.core.ToString());
         inventoryCanvas.enabled = true;
         barrel.text = currentPlayerInventory.barrel.ToString();
@@ -54,3 +66,4 @@ public class MenuManager : MonoBehaviour
         inventoryCanvas.enabled = false;
     }
 }
+ 
