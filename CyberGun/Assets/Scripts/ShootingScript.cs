@@ -28,7 +28,7 @@ public class ShootingScript : MonoBehaviour
         inventory.Start();
         CheckStats();
         currentBulletsInMagazine = magazineSize;
-        multishot = 5;
+        multishot = 1;
     }
 
     public void Update()
