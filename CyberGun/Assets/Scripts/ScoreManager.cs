@@ -12,7 +12,7 @@ public class ScoreManager : MonoBehaviour
         score += (int)(amount * multiplier);
     }
 
-    public void ReduceScore(int amount)
+    public  void ReduceScore(int amount)
     {
         score -= amount;
     }
