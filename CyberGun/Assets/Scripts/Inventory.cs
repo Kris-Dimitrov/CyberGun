@@ -19,7 +19,7 @@ public class Inventory
 
     public void Start()
     {
-        core = new CoreItem("Default Core", 1, "Projectile");
+        core = new CoreItem("Default Core", 1);
         optic = new OpticItem("Default Optic", 1);
         handle = new HandleItem("Default Handle", 1);
         barrel = new BarrelItem("Default Barrel", 1);

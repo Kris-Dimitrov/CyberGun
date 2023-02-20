@@ -22,6 +22,7 @@ public class CoreItem : IItem
         List<string> Types = new List<string>();
         Types.Add("Hitscan");
         Types.Add("Projectile");
+
         for (int i = 0; i < Level; i++)
         {
             Buffs type = (Buffs)Random.Range(0, Buffs.GetNames(typeof(Buffs)).Length);
@@ -33,6 +34,11 @@ public class CoreItem : IItem
             {
                 Attributes.Add(type, Level * (int)(Random.value * 10));
             }
+        }
+
+        if (Type == "None")
+        {
+            Type = Types[Random.Range(0, Types.Count)];
         }
     }
 
