@@ -11,12 +11,15 @@ public class ShootingScript : MonoBehaviour
     public float accuracy;
     public int magazineSize;
     public int currentBulletsInMagazine;
-    public int reloadSpeed;
+    public float reloadSpeed;
     public int multishot;
     public int shotDelay;
 
     [SerializeField] public Inventory inventory;
     [SerializeField] private Dictionary<string, int> attributes;
+    [SerializeField] public  float reloadProgress;
+    [SerializeField] bool canShoot;
+    [SerializeField] bool isReloading;
 
     public Camera cam;
     public LineRenderer lineRenderer;
@@ -31,7 +34,6 @@ public class ShootingScript : MonoBehaviour
         currentBulletsInMagazine = magazineSize;
         multishot = 1;
     }
-
     public void FixedUpdate()
     {
         if (Input.GetMouseButtonDown(0))
@@ -39,14 +41,21 @@ public class ShootingScript : MonoBehaviour
             Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && !isReloading)
         {
-            Reload();
+            isReloading = true;
+            reloadProgress = reloadSpeed / 5;
+            StartCoroutine(Reload());
+        }
+
+        if (isReloading)
+        {
+            reloadProgress -= 0.05f;
         }
     }
     public void Shoot()
     {
-        if (currentBulletsInMagazine > 0)
+        if (currentBulletsInMagazine > 0 && canShoot)
         {
             if (inventory.core.Type == "HitScan")
             {
@@ -99,7 +108,6 @@ public class ShootingScript : MonoBehaviour
             newBullet.transform.SetParent(null);
         }
     }
-
     public void CheckStats()
     {
         attributes = inventory.CheckStats();
@@ -123,7 +131,7 @@ public class ShootingScript : MonoBehaviour
             }
             else if (stat.Key == "ReloadSpeed")
             {
-                reloadSpeed = stat.Value;
+                reloadSpeed = 10 / stat.Value;
             }
             else if (stat.Key == "Accuracy")
             {
@@ -131,14 +139,20 @@ public class ShootingScript : MonoBehaviour
             }
             else if (stat.Key == "'Multishot")
             {
-                multishot = stat.Value;
+                multishot += stat.Value;
             }
         }
     }
 
-    public void Reload()
+    IEnumerator Reload()
     {
+        canShoot = false;
+        Debug.Log("Reloading for " + reloadSpeed);
+        yield return new WaitForSeconds(reloadSpeed);
         currentBulletsInMagazine = magazineSize;
+        reloadProgress = 0;
+        canShoot = true;
+        isReloading = false;
     }
 
     IEnumerator ShowLaser()

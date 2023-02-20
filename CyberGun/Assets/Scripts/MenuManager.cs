@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField]Canvas inventoryCanvas;
+    [SerializeField] Canvas inventoryCanvas;
     [SerializeField] TMP_Text barrel;
     [SerializeField] TMP_Text optic;
     [SerializeField] TMP_Text core;
@@ -14,6 +15,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] TMP_Text playerHealth;
     [SerializeField] TMP_Text ammo;
     [SerializeField] TMP_Text score;
+    [SerializeField] RectTransform reloadMeterScale;
 
     bool isInventoryOpen;
     Inventory currentPlayerInventory;
@@ -48,6 +50,7 @@ public class MenuManager : MonoBehaviour
         playerHealth.text = "HP: " + playerHealthScript.health.ToString() + "/" + playerHealthScript.maxHealth.ToString();
         ammo.text = shootingScript.currentBulletsInMagazine.ToString() + "/" + shootingScript.magazineSize.ToString();
         score.text = scoreManager.score.ToString();
+        reloadMeterScale.localScale = new Vector3(shootingScript.reloadProgress / 5 , reloadMeterScale.localScale.y);
     }
 
     private void OpenInventory() 

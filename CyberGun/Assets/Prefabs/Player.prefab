@@ -78,6 +78,7 @@ MonoBehaviour:
   maxDashCount: 10
   dashConsumed: 10
   dashRecoverySpeed: 0.1
+  minimumHeight: -20
   jumpKey: 32
   slamKey: 306
   dashKey: 304
@@ -114,6 +115,8 @@ MonoBehaviour:
   currentBulletsInMagazine: 0
   reloadSpeed: 0
   multishot: 0
+  shotDelay: 0
+  canShoot: 1
   cam: {fileID: 4842482678562651818}
   lineRenderer: {fileID: 4842482676735576627}
   bullet: {fileID: 2716574887292297538, guid: 74c4c432b5a907b49ad93f3d3e4ac780, type: 3}
