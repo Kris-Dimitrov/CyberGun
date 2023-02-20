@@ -21,7 +21,7 @@ public class Inventory
     {
         core = new CoreItem("Default Core", 1, "Projectile");
         optic = new OpticItem("Default Optic", 1);
-        handle = new HandleItem("Default Handle", 1, "Single");
+        handle = new HandleItem("Default Handle", 1);
         barrel = new BarrelItem("Default Barrel", 1);
         CheckStats();
     }

@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  timeBeforeDestroy: 5
+  timeBeforeDestroy: 8
 --- !u!108 &638056999719431753
 Light:
   m_ObjectHideFlags: 0

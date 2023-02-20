@@ -15,7 +15,7 @@ public class EnemyContactDamage : MonoBehaviour
             collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
 
-        if (destroyOnContact)
+        if (destroyOnContact && tag!= "Missile")
         {
             Destroy(this.gameObject);
         }

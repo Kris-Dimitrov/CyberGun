@@ -28,7 +28,6 @@ public class EnemySpawner : MonoBehaviour
     {
        
         GameObject newEnemy = Instantiate(toSpawn,spawnPosition);
-        //newEnemy.transform.SetParent(null);
         Debug.Log(newEnemy.tag);
     }
 }

@@ -22,11 +22,11 @@ public class OpticItem : IItem
             Buffs type = (Buffs)Random.Range(0, Buffs.GetNames(typeof(Buffs)).Length);
             if (Attributes.ContainsKey(type))
             {
-                Attributes[type] += Level * 10;
+                Attributes[type] += Level * (int)(Random.value * 10);
             }
             else
             {
-                Attributes.Add(type, Level * 10);
+                Attributes.Add(type, Level * (int)(Random.value * 10));
             }
         }
     }

@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontalMovement;
     float verticalMovement;
 
-    float currentDashAmount;
+    public float currentDashAmount;
 
     Vector3 moveDirection;
 
@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void Jump() // This is my Jump function. It adds applies an impulse to the rigidbody
+    private void Jump() // This is a Jump function. It adds applies an impulse to the rigidbody
     {
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
@@ -144,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (currentDashAmount >= dashConsumed && Input.GetKeyDown(dashKey))
         {
-            rb.AddForce(transform.forward * dashMult, ForceMode.Impulse);
+            rb.AddForce(rb.velocity * dashMult, ForceMode.Impulse);
             currentDashAmount -= dashConsumed;
         }
 

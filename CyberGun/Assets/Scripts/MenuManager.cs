@@ -16,18 +16,20 @@ public class MenuManager : MonoBehaviour
     [SerializeField] TMP_Text ammo;
     [SerializeField] TMP_Text score;
     [SerializeField] RectTransform reloadMeterScale;
+    [SerializeField] RectTransform dashMeterScale;
 
     bool isInventoryOpen;
     Inventory currentPlayerInventory;
     ShootingScript shootingScript;
     PlayerHealth playerHealthScript;
     ScoreManager scoreManager;
-
+    PlayerMovement playerMovementScript;
     private void Start()
     {
         shootingScript = GameObject.FindWithTag("Player").GetComponent<ShootingScript>();
         playerHealthScript = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        playerMovementScript = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         isInventoryOpen = false;
         CloseInventory();
     }
@@ -50,7 +52,8 @@ public class MenuManager : MonoBehaviour
         playerHealth.text = "HP: " + playerHealthScript.health.ToString() + "/" + playerHealthScript.maxHealth.ToString();
         ammo.text = shootingScript.currentBulletsInMagazine.ToString() + "/" + shootingScript.magazineSize.ToString();
         score.text = scoreManager.score.ToString();
-        reloadMeterScale.localScale = new Vector3(shootingScript.reloadProgress / 5 , reloadMeterScale.localScale.y);
+        reloadMeterScale.localScale = new Vector3(shootingScript.reloadProgress, reloadMeterScale.localScale.y); // add to start
+        dashMeterScale.localScale = new Vector3(playerMovementScript.currentDashAmount /200 , dashMeterScale.localScale.y);
     }
 
     private void OpenInventory() 
