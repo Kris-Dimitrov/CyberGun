@@ -3,6 +3,7 @@ using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -12,38 +13,30 @@ public class HandleItem : IItem
 {
     public int Level { get; set; }
     public string Name { get; set; }
-    public Dictionary<Buffs, int> Attributes { get; set; }
-    public string FireMode { get; set; }
-    public enum Buffs
-    {
-        MagazineSize,
-        ReloadSpeed
-    }
+    public Dictionary<string, int> Attributes { get; set; }
+    public string[] Buffs { get; set; }
+    public string Type { get; set; }
     public void Generate()
     {
-        List<string> FireModes = new List<string>();
-        FireModes.Add("Auto");
-        FireModes.Add("Single");
-        FireModes = new List<string>();
-        FireModes.Add("Auto");
-        FireModes.Add("Single");
-
+        Buffs = new string[] { "MagazineSize", "ReloadSpeed" };
+        List<string> Types = new List<string>() { "Auto", "Single" };
+        
         for (int i = 0; i < Level; i++)
         {
-            Buffs type = (Buffs)Random.Range(0, Buffs.GetNames(typeof(Buffs)).Length);
+            string type = Buffs[Random.Range(0, Buffs.Length)];
             if (Attributes.ContainsKey(type))
             {
-                Attributes[type] += Level * (int)(Random.value * 10);
+                Attributes[type] += Level * Random.Range(1, 11);
             }
             else
             {
-                Attributes.Add(type, Level * (int)(Random.value * 10));
+                Attributes.Add(type, Level * Random.Range(1, 11));
             }
         }
 
-        if (FireMode == "None")
+        if ( Type == "None")
         {
-            FireMode = FireModes[Random.Range(0, FireModes.Count)];
+            Type = Types[Random.Range(0, Types.Count)];
         }
     }
 
@@ -52,30 +45,36 @@ public class HandleItem : IItem
 
     }
 
-    public HandleItem(string name, int level, string fireMode)
+    public HandleItem(string name, int level, string type)
     {
         Name = name;
         Level = level;
-        Attributes = new Dictionary<Buffs, int>();
-        FireMode = fireMode;
+        Attributes = new Dictionary<string, int>();
+        Type = type;
         Generate();
     }
-
     public HandleItem(string name, int level)
     {
         Name = name;
         Level = level;
-        Attributes = new Dictionary<Buffs, int>();
-        FireMode = "None";
+        Attributes = new Dictionary<string, int>();
+        Type = "None";
         Generate();
     }
-
+    public HandleItem(int level) 
+    {
+        Name = "New Handle";
+        Level = level;
+        Attributes = new Dictionary<string, int>();
+        Type = "None";
+        Generate();
+    }
     public override string ToString()
     {
         string res = "";
         res += "Name: " +  Name + "\n";
         res += "Level: " + Level.ToString() + "\n";
-        res += "FireMode: " + FireMode + "\n";
+        res += "Type: " + Type + "\n";
         res += "Attributes: \n";
         foreach (var type in Attributes.Keys) 
         {

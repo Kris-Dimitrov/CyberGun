@@ -70,7 +70,7 @@ MonoBehaviour:
   moveSpeed: 12
   drag: 6
   speedMult: 10
-  dashMult: 100
+  dashMult: 10
   jumpForce: 100
   gravity: -20
   slamMultiplier: 50
@@ -82,6 +82,7 @@ MonoBehaviour:
   jumpKey: 32
   slamKey: 306
   dashKey: 304
+  currentDashAmount: 0
 --- !u!114 &4842482676735576625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +117,11 @@ MonoBehaviour:
   reloadSpeed: 0
   multishot: 0
   shotDelay: 0
+  reloadProgress: 0
+  shotProgress: 0
   canShoot: 1
+  singleShotCheck: 0
+  isReloading: 0
   cam: {fileID: 4842482678562651818}
   lineRenderer: {fileID: 4842482676735576627}
   bullet: {fileID: 2716574887292297538, guid: 74c4c432b5a907b49ad93f3d3e4ac780, type: 3}

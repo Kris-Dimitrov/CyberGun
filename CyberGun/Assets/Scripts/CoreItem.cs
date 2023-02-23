@@ -9,30 +9,27 @@ public class CoreItem : IItem
     public int Level { get; set; }
     public string Name { get; set; }
     public string Type { get; set; }
-    public Dictionary<Buffs, int> Attributes { get; set; }
-    public enum Buffs {
-        Damage,
-        ShotSpeed,
-        ShotDelay,
-    }
-
+    public Dictionary<string, int> Attributes { get; set; }
+    public string[] Buffs { get; set; }
 
     public void Generate()
     {
+        Buffs = new string[] { "Damage", "ShotSpeed", "ShotDelay" };
+
         List<string> Types = new List<string>();
         Types.Add("Hitscan");
         Types.Add("Projectile");
 
         for (int i = 0; i < Level; i++)
         {
-            Buffs type = (Buffs)Random.Range(0, Buffs.GetNames(typeof(Buffs)).Length);
+            string type = Buffs[Random.Range(0, Buffs.Length)];
             if (Attributes.ContainsKey(type))
             {
-                Attributes[type] += Level * (int)(Random.value * 10);
+                Attributes[type] += Level * Random.Range(1, 11);
             }
             else
             {
-                Attributes.Add(type, Level * (int)(Random.value * 10));
+                Attributes.Add(type, Level * Random.Range(1, 11));
             }
         }
 
@@ -52,7 +49,7 @@ public class CoreItem : IItem
         Name = name;
         Level = level;
         Type = type;
-        Attributes = new Dictionary<Buffs, int>();
+        Attributes = new Dictionary<string, int>();
         Generate();
     }
 
@@ -61,7 +58,16 @@ public class CoreItem : IItem
         Name = name;
         Level = level;
         Type = "None";
-        Attributes = new Dictionary<Buffs, int>();
+        Attributes = new Dictionary<string, int>();
+        Generate();
+    }
+
+    public CoreItem(int level)
+    {
+        Name = "New Core";
+        Level = level;
+        Type = "None";
+        Attributes = new Dictionary<string, int>();
         Generate();
     }
 

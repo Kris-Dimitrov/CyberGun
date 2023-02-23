@@ -7,27 +7,24 @@ public class BarrelItem : IItem
 {
     public int Level { get; set; }
     public string Name { get; set; }
-    public Dictionary<Buffs, int> Attributes { get; set; }
-    public enum Buffs
-    {
-        Damage,
-        ShotSpeed,
-        Multishot,
-        ShotDelay,
-            
-    }
+    public Dictionary<string, int> Attributes { get; set; }
+
+    public string Type { get; set; }
+    public string[] Buffs { get; set; }
+
     public void Generate()
     {
+        Buffs = new string[] { "Damage", "ShotSpeed", "Multishot", "ShotDelay" };
         for (int i = 0; i < Level; i++)
         {
-            Buffs type = (Buffs)Random.Range(0, Buffs.GetNames(typeof(Buffs)).Length);
+            string type = Buffs[Random.Range(0, Buffs.Length)];
             if (Attributes.ContainsKey(type))
             {
-                Attributes[type] += Level * (int)(Random.value * 10);
+                Attributes[type] += Level * Random.Range(1, 11);
             }
             else
             {
-                Attributes.Add(type, Level * (int)(Random.value * 10));
+                Attributes.Add(type, Level * Random.Range(1, 11));
             }
         }
     }
@@ -41,10 +38,16 @@ public class BarrelItem : IItem
     {
         Name = name;
         Level = level;
-        Attributes = new Dictionary<Buffs, int>();
+        Attributes = new Dictionary<string, int>();
         Generate();
     }
-
+    public BarrelItem(int level)
+    {
+        Name = "New Barrel";
+        Level = level;
+        Attributes = new Dictionary<string, int>();
+        Generate();
+    }
     public override string ToString()
     {
         string res = "";

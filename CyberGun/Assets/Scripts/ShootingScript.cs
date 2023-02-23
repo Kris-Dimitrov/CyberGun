@@ -41,11 +41,11 @@ public class ShootingScript : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            Debug.Log(inventory.handle.FireMode);
+            Debug.Log(inventory.handle.Type );
             Shoot();
         }
 
-        if (Input.GetMouseButtonUp(0) && inventory.handle.FireMode == "Single")
+        if (Input.GetMouseButtonUp(0) && inventory.handle.Type == "Single")
         {
             singleShotCheck = true; 
         }
@@ -64,12 +64,18 @@ public class ShootingScript : MonoBehaviour
 
         if (shotProgress > 0)
         {
+            canShoot = false;
             shotProgress -= Time.deltaTime;
+            Debug.Log(shotProgress);
+        }
+        else 
+        {
+            canShoot = true;
         }
     }
     public void Shoot()
     {
-        if (currentBulletsInMagazine > 0 && canShoot && singleShotCheck)
+        if (currentBulletsInMagazine > 0 && canShoot && singleShotCheck && !isReloading)
         {
             if (inventory.core.Type == "Hitscan")
             {
@@ -80,7 +86,7 @@ public class ShootingScript : MonoBehaviour
                 FireProjectile();
             }
 
-            if (inventory.handle.FireMode == "Single")
+            if (inventory.handle.Type == "Single")
             {
                 singleShotCheck = false;
             }
@@ -142,7 +148,7 @@ public class ShootingScript : MonoBehaviour
             }
             else if (stat.Key == "ShotDelay")
             {
-                shotDelay = 2 / stat.Value;
+                shotDelay = 10 / stat.Value;
             }
             else if (stat.Key == "MagazineSize")
             {
@@ -150,7 +156,7 @@ public class ShootingScript : MonoBehaviour
             }
             else if (stat.Key == "ReloadSpeed")
             {
-                reloadSpeed = 4  / stat.Value;
+                reloadSpeed = 5  / (float)stat.Value;
             }
             else if (stat.Key == "Accuracy")
             {
