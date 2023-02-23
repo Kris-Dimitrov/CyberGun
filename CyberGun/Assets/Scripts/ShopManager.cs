@@ -37,10 +37,10 @@ public class ShopManager : MonoBehaviour
     {
         for (int i = 0; i < itemDisplays.Length; i++)
         {
+            
             KeyValuePair<IItem, int> item = GenerateNewShopItem();
-            Debug.Log(item.Key.ToString());
-            Debug.Log(item.Value);
             itemsInShop.Add(item.Key, item.Value);
+            itemDisplays[i].enabled = true;
             itemDisplays[i].text = item.ToString();
             itemDisplays[i].text += "Price: " + item.Value;
         }
@@ -109,7 +109,6 @@ public class ShopManager : MonoBehaviour
 
             if (item is CoreItem)
             {
-                Debug.Log(((CoreItem)item).Type);
                 shootingScript.inventory.core = (CoreItem)item;
             }
             else if (item is BarrelItem)

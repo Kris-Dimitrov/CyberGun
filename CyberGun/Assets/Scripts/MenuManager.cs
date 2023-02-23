@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -49,6 +50,12 @@ public class MenuManager : MonoBehaviour
                 OpenInventory();
             }   
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+        }
+
         playerHealth.text = "HP: " + playerHealthScript.health.ToString() + "/" + playerHealthScript.maxHealth.ToString();
         ammo.text = shootingScript.currentBulletsInMagazine.ToString() + "/" + shootingScript.magazineSize.ToString();
         score.text = scoreManager.score.ToString();

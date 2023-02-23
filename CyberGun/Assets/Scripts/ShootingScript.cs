@@ -41,7 +41,6 @@ public class ShootingScript : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            Debug.Log(inventory.handle.Type );
             Shoot();
         }
 
@@ -66,7 +65,6 @@ public class ShootingScript : MonoBehaviour
         {
             canShoot = false;
             shotProgress -= Time.deltaTime;
-            Debug.Log(shotProgress);
         }
         else 
         {
@@ -107,7 +105,6 @@ public class ShootingScript : MonoBehaviour
 
             lineRenderer.SetPositions(positions);
             StartCoroutine(ShowLaser());
-            Debug.Log(hit.collider.gameObject.tag);
             if (hit.collider.gameObject.tag == "Enemy")
             {
                 hit.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage * multishot);
