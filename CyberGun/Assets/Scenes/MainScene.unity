@@ -201,7 +201,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &327344519
 GameObject:
@@ -367,8 +367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3868b6b17a2e4e14e9223cf820bc3784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 1000
-  multiplier: 1.2
+  score: 0
+  multiplier: 1
 --- !u!4 &403532268
 Transform:
   m_ObjectHideFlags: 0
@@ -749,7 +749,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &572795129
 GameObject:
@@ -1061,7 +1061,7 @@ Transform:
   - {fileID: 1707017844}
   - {fileID: 1778261275}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1177339607
 GameObject:
@@ -1567,7 +1567,7 @@ RectTransform:
   - {fileID: 681233717}
   - {fileID: 1652859485}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2218,7 +2218,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  m_Color: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
   m_Intensity: 1
   m_Range: 1000
   m_SpotAngle: 30
@@ -2282,7 +2282,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1707017840
 GameObject:
@@ -2350,7 +2350,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1707017840}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -2424,7 +2424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   round: 0
-  arenaSize: {x: 0, y: 0}
+  arenaSize: {x: 100, y: 100}
   FlyingEnemy: {fileID: 1647089640398259581, guid: 65ecc0f17706c2c4cbe896537a219c69, type: 3}
   GroundSpawner: {fileID: 2387900450580894268, guid: efaad9b300a56eb458e1945ed8649d78, type: 3}
   Turrets: {fileID: 1379996440471164482, guid: 01a2273ed5b9f654985746cf6568bb60, type: 3}
@@ -2745,7 +2745,7 @@ Transform:
   m_Children:
   - {fileID: 437500241}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2066202628
 GameObject:
@@ -3148,6 +3148,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4842482678746146158, guid: 3250b571ff9415f429fac60689f9f3b7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842482678746146159, guid: 3250b571ff9415f429fac60689f9f3b7, type: 3}
+      propertyPath: m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842482678746146159, guid: 3250b571ff9415f429fac60689f9f3b7, type: 3}
+      propertyPath: m_Range
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 4842482678746146159, guid: 3250b571ff9415f429fac60689f9f3b7, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -3162,7 +3174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4842482678746146159, guid: 3250b571ff9415f429fac60689f9f3b7, type: 3}
       propertyPath: m_Intensity
-      value: 0.69
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3250b571ff9415f429fac60689f9f3b7, type: 3}

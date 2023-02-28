@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     float playerHeight = 2f;
     public float moveSpeed = 6f;
-    //private float moveSpeed = 6f;
     [SerializeField] float drag = 6f;
     [SerializeField] float speedMult = 10f;
     [SerializeField] float dashMult = 10f;
@@ -42,7 +41,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         rb = GetComponent<Rigidbody>();
         
         rb.freezeRotation = true;
@@ -55,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
         startingPosition = this.transform.position;
     }
+
     void Update()
     {
         GetInput();
@@ -74,7 +76,6 @@ public class PlayerMovement : MonoBehaviour
             this.transform.position = startingPosition;
         }
     }
-
     private void GetInput()
     {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
@@ -101,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void Jump() // This is a Jump function. It adds applies an impulse to the rigidbody
+    private void Jump()
     {
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }

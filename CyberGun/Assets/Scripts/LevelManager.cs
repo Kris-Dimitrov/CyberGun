@@ -73,7 +73,7 @@ public class LevelManager : MonoBehaviour
         {
             Vector3 spawnPos = new Vector3(Random.Range(-arenaSize.x, arenaSize.x),0, Random.Range(-arenaSize.y, arenaSize.y));
             Quaternion quaternion = new Quaternion();
-            quaternion.eulerAngles = new Vector3(0, -90, 0);
+            quaternion.eulerAngles = new Vector3(-90, 0, 0);
             GameObject newEnemy = Instantiate(GroundSpawner, spawnPos, quaternion);
             newEnemy.transform.parent = null;
         }

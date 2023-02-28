@@ -32,12 +32,13 @@ public class ShootingScript : MonoBehaviour
     {
         inventory = new Inventory();
         inventory.Start();
+        multishot = 1;
         CheckStats();
         currentBulletsInMagazine = magazineSize;
         singleShotCheck = true;
-        multishot = 1;
     }
-    public void FixedUpdate()
+
+    private void Update()
     {
         if (Input.GetMouseButton(0))
         {
@@ -46,7 +47,7 @@ public class ShootingScript : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && inventory.handle.Type == "Single")
         {
-            singleShotCheck = true; 
+            singleShotCheck = true;
         }
 
         if (Input.GetKeyDown(KeyCode.R) && !isReloading)
@@ -55,7 +56,10 @@ public class ShootingScript : MonoBehaviour
             reloadProgress = reloadSpeed / 10;
             StartCoroutine(Reload());
         }
-
+    }
+    public void FixedUpdate()
+    {
+        
         if (isReloading && reloadProgress > 0)
         {
             reloadProgress -= Time.deltaTime / 10;

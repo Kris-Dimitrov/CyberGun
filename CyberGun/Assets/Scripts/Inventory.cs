@@ -31,8 +31,6 @@ public class Inventory
         attributes.Clear();
         AddBaseStats();
 
-        Debug.Log(core.Name);
-
         foreach (var item in core.Attributes)
         {
             if (attributes.ContainsKey(item.Key.ToString()))

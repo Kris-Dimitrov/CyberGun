@@ -97,7 +97,6 @@ public class ShopManager : MonoBehaviour
             canvas.enabled = false;
         }
     }
-
     bool TryToBuy(KeyValuePair<IItem, int> pair) 
     {
         int price = pair.Value;
@@ -130,7 +129,6 @@ public class ShopManager : MonoBehaviour
             return false;
         }
     }
-
     private KeyValuePair<IItem, int> GenerateNewShopItem() 
     {
         IItem item;
