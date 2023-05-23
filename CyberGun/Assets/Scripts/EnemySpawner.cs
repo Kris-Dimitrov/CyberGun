@@ -27,7 +27,5 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemy() 
     {
        
-        GameObject newEnemy = Instantiate(toSpawn,spawnPosition);
-        Debug.Log(newEnemy.tag);
-    }
+        GameObject newEnemy = Instantiate(toSpawn,spawnPosition);    }
 }

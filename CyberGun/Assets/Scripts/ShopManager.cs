@@ -41,7 +41,7 @@ public class ShopManager : MonoBehaviour
             KeyValuePair<IItem, int> item = GenerateNewShopItem();
             itemsInShop.Add(item.Key, item.Value);
             itemDisplays[i].enabled = true;
-            itemDisplays[i].text = item.ToString();
+            itemDisplays[i].text = item.Key.ToString();
             itemDisplays[i].text += "Price: " + item.Value;
         }
     }
@@ -49,6 +49,7 @@ public class ShopManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && isShopActive)
         {
+            Debug.Log(itemsInShop.ElementAt(0).Key.GetType());
             if (TryToBuy(itemsInShop.ElementAt(0))) 
             {
                 shootingScript.CheckStats();
@@ -105,7 +106,7 @@ public class ShopManager : MonoBehaviour
         if (scoreManager.score >= price)
         {
             scoreManager.score -= price;
-
+            Debug.Log(item.GetType());
             if (item is CoreItem)
             {
                 shootingScript.inventory.core = (CoreItem)item;
@@ -122,6 +123,7 @@ public class ShopManager : MonoBehaviour
             {
                 shootingScript.inventory.optic = (OpticItem)item;
             }
+            shootingScript.inventory.CheckStats();
             return true;
         }
         else 

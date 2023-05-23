@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 2145839840525141795}
   - component: {fileID: 4189327038428034025}
   - component: {fileID: 3306467994936523990}
-  - component: {fileID: 3306467994936523991}
   - component: {fileID: 3306467994936523989}
   - component: {fileID: 3306467994936523988}
-  - component: {fileID: -4904497955695189159}
-  - component: {fileID: -6171502896118598536}
+  - component: {fileID: 8661402316280804438}
+  - component: {fileID: 3340316069961769622}
+  - component: {fileID: 5380130464577402690}
   m_Layer: 8
   m_Name: GroundSpawner1
   m_TagString: Enemy
@@ -106,20 +106,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &3306467994936523991
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2387900450580894268}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2534964839176971238, guid: fd1bc32f1f6ea824097b716be91b090e, type: 3}
 --- !u!114 &3306467994936523989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,8 +136,8 @@ MonoBehaviour:
   startingHelath: 10
   health: 0
   points: 500
-  explosion: {fileID: -6171502896118598536}
---- !u!199 &-4904497955695189159
+  explosion: {fileID: 3340316069961769622}
+--- !u!199 &8661402316280804438
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -223,7 +209,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!198 &-6171502896118598536
+--- !u!198 &3340316069961769622
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -359,7 +345,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -475,7 +461,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.002
+      scalar: 0.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -798,7 +784,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -938,7 +924,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.01
+      value: 1
       mode: 0
       spread: 0
       speed:
@@ -4931,6 +4917,19 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!65 &5380130464577402690
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2387900450580894268}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2.5, z: 3}
+  m_Center: {x: 0, y: 0, z: 0.3}
 --- !u!1 &3306467993387407572
 GameObject:
   m_ObjectHideFlags: 0

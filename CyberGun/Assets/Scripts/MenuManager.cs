@@ -16,6 +16,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] TMP_Text playerHealth;
     [SerializeField] TMP_Text ammo;
     [SerializeField] TMP_Text score;
+    [SerializeField] TMP_Text scoreInShop;
     [SerializeField] RectTransform reloadMeterScale;
     [SerializeField] RectTransform dashMeterScale;
 
@@ -39,14 +40,13 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            isInventoryOpen = !isInventoryOpen;
             if (isInventoryOpen)
             {
-                isInventoryOpen = !isInventoryOpen;
                 CloseInventory();
             }
             else 
             {
-                isInventoryOpen = !isInventoryOpen;
                 OpenInventory();
             }   
         }
@@ -59,6 +59,7 @@ public class MenuManager : MonoBehaviour
         playerHealth.text = "HP: " + playerHealthScript.health.ToString() + "/" + playerHealthScript.maxHealth.ToString();
         ammo.text = shootingScript.currentBulletsInMagazine.ToString() + "/" + shootingScript.magazineSize.ToString();
         score.text = scoreManager.score.ToString();
+        scoreInShop.text = "Score: " + scoreManager.score.ToString();
         reloadMeterScale.localScale = new Vector3(shootingScript.reloadProgress, reloadMeterScale.localScale.y); // add to start
         dashMeterScale.localScale = new Vector3(playerMovementScript.currentDashAmount /200 , dashMeterScale.localScale.y);
     }

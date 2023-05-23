@@ -119,7 +119,6 @@ public class ShootingScript : MonoBehaviour
             Vector3[] positions = { transform.position, ray.direction * 1000 };
             lineRenderer.SetPositions(positions);
             StartCoroutine(ShowLaser());
-            Debug.Log("Did not Hit");
         }
     }
     public void FireProjectile()

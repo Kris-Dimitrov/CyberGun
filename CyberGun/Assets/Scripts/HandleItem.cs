@@ -26,11 +26,11 @@ public class HandleItem : IItem
             string type = Buffs[Random.Range(0, Buffs.Length)];
             if (Attributes.ContainsKey(type))
             {
-                Attributes[type] += Level * Random.Range(1, 11);
+                Attributes[type] += Level * Random.Range(1, 3);
             }
             else
             {
-                Attributes.Add(type, Level * Random.Range(1, 11));
+                Attributes.Add(type, Level * Random.Range(1, 3));
             }
         }
 

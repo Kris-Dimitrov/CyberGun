@@ -22,7 +22,6 @@ public class ZoneEnemyScript : MonoBehaviour
         if (Vector3.Distance(this.transform.position, player.transform.position) < minimalDistanceToTrigger)
         {
             currentCharge += Time.deltaTime;
-            Debug.Log(currentCharge);
         }
         else if(currentCharge > 0)
         {

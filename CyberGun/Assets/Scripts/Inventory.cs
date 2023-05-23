@@ -81,10 +81,11 @@ public class Inventory
 
     public void AddBaseStats() 
     {
-        attributes.Add("Damage", 1);
+        attributes.Add("Damage", 3);
         attributes.Add("ShotSpeed", 100);
+        attributes.Add("ShotDelay", 5);
         attributes.Add("MagazineSize", 5);
-        attributes.Add("ReloadSpeed", 1);
+        attributes.Add("ReloadSpeed", 5);
         attributes.Add("Accuracy", 2);
     }
 
